@@ -1,16 +1,71 @@
-# React + Vite
+# Catálogo de Produtos
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Aplicação desenvolvida com React e Vite para consultar, pesquisar e visualizar detalhes de produtos utilizando uma API REST.
 
-Currently, two official plugins are available:
+## Pré-requisitos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js instalado
+- npm instalado
+- Navegador web
 
-## React Compiler
+## Como executar o projeto
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Clone o repositório:
 
-## Expanding the Oxlint configuration
+   ```bash
+   git clone URL_DO_REPOSITORIO
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+2. Entre na pasta do projeto:
+
+   ```bash
+   cd catalogo-produtos
+   ```
+
+3. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+4. Inicie a aplicação:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Acesse o endereço local informado no terminal.  
+
+## Árvore de componentes
+
+```text
+App
+├── Header
+├── ProductSearch
+├── ProductList
+│   └── ProductCard (repetido para cada produto)
+└── ProductDetails (quando um produto é selecionado)
+```
+
+## Fluxo de dados entre os componentes
+
+O componente `App` gerencia os estados da aplicação, incluindo os produtos, a pesquisa, o carregamento e os erros. O componente `ProductSearch` recebe o texto da pesquisa por meio de props e comunica as alterações ao `App` por meio de uma função callback. O `App` filtra os produtos e envia a lista resultante para `ProductList`. Esse componente utiliza `map` para percorrer a lista e renderizar um `ProductCard` para cada produto. Quando o usuário clica em “Ver detalhes”, o `ProductCard` chama uma função recebida por props, que atualiza o produto selecionado no `App`. O `App` consulta a API pelo identificador do produto e envia os dados para `ProductDetails`, que apresenta as informações e permite fechar o painel.
+
+## Evidências dos testes manuais
+
+### Teste 1 — Listagem de produtos
+
+Verificação da exibição dos produtos carregados pela API.
+
+![Listagem de produtos](./evidencias/image.png)
+
+### Teste 2 — Pesquisa
+
+Verificação da pesquisa pelo título dos produtos.
+
+![Pesquisa de produtos](./evidencias/image2.png)
+
+### Teste 3 — Detalhes do produto
+
+![Detalhes do produto](./evidencias/image3.png)
+
